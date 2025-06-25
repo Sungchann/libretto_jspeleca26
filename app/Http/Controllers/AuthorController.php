@@ -16,7 +16,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $authors = Author::all();
+        return view('authors.index', compact('authors'));
     }
 
     /**
@@ -24,7 +25,7 @@ class AuthorController extends Controller
      */
     public function create(): View
     {
-        return view('author.create');
+        return view('authors.create');
     }
 
     /**
@@ -32,31 +33,35 @@ class AuthorController extends Controller
      */
     public function store(StoreAuthorRequest $request)
     {
-        //
+        $request->validate(['name' => 'required']);
+        Author::create($request->all());
+        return redirect()->route('authors.index')->with('success', 'Author created successfully.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Author $author)
+    public function show(Author $author): View
     {
-        //
+        return view('authors.edit', compact('author'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Author $author)
+    public function edit(Author $author): View    
     {
-        //
+        return view('authors.edit', compact('author'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAuthorRequest $request, Author $author)
+    public function update(UpdateAuthorRequest $request, Author $author): RedirectResponse    
     {
-        //
+        $request->validate(['name' => 'required']);
+        $author->update($request->all());
+        return redirect()->route('authors.index')->with('success', 'Author updated successfully.');
     }
 
     /**
@@ -64,6 +69,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+        $author->delete();
+        return redirect()->route('authors.index')->with('success', 'Author deleted successfully.');
+
     }
 }
