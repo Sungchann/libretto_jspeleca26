@@ -14,6 +14,9 @@
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav">
                 <li class="nav-item"><a class="nav-link" href="{{ route('authors.index') }}">Authors</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route('books.index') }}">Books</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route(name: 'genres.index') }}">Genres</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ route(name: 'reviews.index') }}">Reviews</a></li>
                 <!-- Add more nav links here -->
             </ul>
         </div>
